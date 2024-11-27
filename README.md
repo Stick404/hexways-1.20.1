@@ -1,0 +1,1 @@
+This is an Addon for [Hex Casting](https://modrinth.com/mod/hex-casting) to add in Portals using [Immersive Portals](https://modrinth.com/mod/immersiveportals). Massive thanks to [Complex Hex](https://github.com/kineticneticat/ComplexHex/) for the Hex Casting 1.20 Code
