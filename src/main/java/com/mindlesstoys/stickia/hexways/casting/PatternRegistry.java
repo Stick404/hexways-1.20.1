@@ -17,9 +17,8 @@ import java.util.Map;
 
 public class PatternRegistry {
     private static final Map<ResourceLocation, ActionRegistryEntry> PATTERNS = new LinkedHashMap<>();
-    //public static final HexPattern OPTEST = make("qaqqwa",HexDir.NORTH_EAST,"optest", new OpTest());
-    public static final HexPattern OP_ONE_WAY = make("qaqqwa",HexDir.NORTH_EAST,"oponeway",new OpOneWayPortal());
-    public static final HexPattern OP_TWO_WAY = make("qaqqww",HexDir.NORTH_EAST,"optwoway",new OpTwoWayPortal());
+    public static final HexPattern OP_ONE_WAY = make("awqwqwadadadaadadaqwdee",HexDir.EAST,"oponeway",new OpOneWayPortal());
+    public static final HexPattern OP_TWO_WAY = make("wdeeqawqwqwadeaqadeaedaqae",HexDir.WEST,"optwoway",new OpTwoWayPortal());
 
     static public void init() {
         for (Map.Entry<ResourceLocation, ActionRegistryEntry> entry : PATTERNS.entrySet()) {
