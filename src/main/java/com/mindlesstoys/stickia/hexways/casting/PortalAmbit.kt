@@ -15,7 +15,7 @@ class PortalAmbit(private val env: CastingEnvironment) : IsVecInRange {
     private val ambit = 32.0
     //before we start the code. HOLY SHIT LETS GOOO
     //Thank you Hex Devs for being awesome
-    //custom ambit with no addons is amazing
+    //custom ambit with no mixins is amazing
     private val id = Keygen.randid()
     private val key = Key(id)
     override fun getKey(): CastingEnvironmentComponent.Key<*> = key
