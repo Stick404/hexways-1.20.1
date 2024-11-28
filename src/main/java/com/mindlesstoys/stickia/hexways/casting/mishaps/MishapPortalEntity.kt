@@ -5,6 +5,7 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.Mishap
 import at.petrak.hexcasting.api.pigment.FrozenPigment
 import at.petrak.hexcasting.api.utils.aqua
+import com.mindlesstoys.stickia.hexways.entites.EntityRegistry.HEXPORTAL_ENTITY_TYPE
 import com.mindlesstoys.stickia.hexways.entites.HexPortal
 import net.minecraft.world.entity.Entity
 import net.minecraft.world.entity.EntityType
@@ -25,7 +26,7 @@ class MishapPortalEntity(val got: Entity,val wanted: EntityType<HexPortal>) : Mi
     companion object {
         @JvmStatic
         fun of(wantedEntity: Entity): MishapPortalEntity {
-            val typePortal = HexPortal.entityType
+            val typePortal = HEXPORTAL_ENTITY_TYPE
             return MishapPortalEntity(wantedEntity,typePortal)
         }
     }

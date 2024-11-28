@@ -7,6 +7,7 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.misc.MediaConstants
 import com.mindlesstoys.stickia.hexways.PortalHexUtils
 import com.mindlesstoys.stickia.hexways.PortalHexUtils.Companion.PortalVecRotate
+import com.mindlesstoys.stickia.hexways.entites.EntityRegistry.HEXPORTAL_ENTITY_TYPE
 import com.mindlesstoys.stickia.hexways.entites.HexPortal
 import net.minecraft.world.level.portal.PortalInfo
 import net.minecraft.world.phys.Vec3
@@ -42,7 +43,7 @@ class OpTwoWayPortal : SpellAction {
 
     data class Spell(val prtPos: Vector3f, val prtPosOut: Vec3, val prtRot: Vec3, val prtSize: Double) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            val portalIn: Portal? = HexPortal.entityType.create(env.world)
+            val portalIn: Portal? = HEXPORTAL_ENTITY_TYPE.create(env.world)
 
             portalIn!!.originPos = Vec3(prtPos)
             portalIn.setDestinationDimension(env.world.dimension())

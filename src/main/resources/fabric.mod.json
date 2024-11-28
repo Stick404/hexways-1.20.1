@@ -21,6 +21,11 @@
 				"adapter": "kotlin"
 			}
 		],
+		"client": [
+			{
+				"value": "com.mindlesstoys.stickia.hexways.HexwaysClientInit"
+			}
+		],
 		"fabric-datagen": [
 			{
 				"value": "com.mindlesstoys.stickia.hexways.HexwaysDataGenerator",
