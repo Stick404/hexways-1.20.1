@@ -1,5 +1,6 @@
 package com.mindlesstoys.stickia.hexways
 
+import com.mindlesstoys.stickia.hexways.entites.HexPortal
 import net.minecraft.world.phys.Vec3
 import qouteall.imm_ptl.core.portal.GeometryPortalShape
 import qouteall.imm_ptl.core.portal.Portal
@@ -42,6 +43,17 @@ class PortalHexUtils {
                 }
             }
             return listOf(PrtRotCors,PrtRotCorsCors)
+        }
+        fun moveOrSetPrt(prt: Portal?, pos: Vec3, out: Boolean){
+            if (prt != null && prt is HexPortal){
+                if (out){
+                    prt.setDestination(pos)
+                    prt.reloadAndSyncToClient()
+                }else{
+                    prt.moveTo(pos)
+                    prt.reloadAndSyncToClient()
+                }
+            }
         }
     }
 }

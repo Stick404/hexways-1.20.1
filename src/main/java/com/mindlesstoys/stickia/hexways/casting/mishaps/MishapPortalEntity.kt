@@ -5,29 +5,42 @@ import at.petrak.hexcasting.api.casting.iota.Iota
 import at.petrak.hexcasting.api.casting.mishaps.Mishap
 import at.petrak.hexcasting.api.pigment.FrozenPigment
 import at.petrak.hexcasting.api.utils.aqua
-import com.mindlesstoys.stickia.hexways.entites.EntityRegistry.HEXPORTAL_ENTITY_TYPE
-import com.mindlesstoys.stickia.hexways.entites.HexPortal
+import net.minecraft.ChatFormatting
+import net.minecraft.network.chat.Component.translatable
+import net.minecraft.network.chat.Style
+import net.minecraft.world.effect.MobEffect
+import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.Entity
-import net.minecraft.world.entity.EntityType
 import net.minecraft.world.item.DyeColor
+import kotlin.random.Random
 
-class MishapPortalEntity(val got: Entity,val wanted: EntityType<HexPortal>) : Mishap() {
-    override fun accentColor(ctx: CastingEnvironment, errorCtx: Context): FrozenPigment = dyeColor(DyeColor.LIGHT_BLUE)
+class MishapPortalEntity(val got: Entity,) : Mishap() {
+    val TPDist = 5.0
 
+    override fun accentColor(ctx: CastingEnvironment, errorCtx: Context): FrozenPigment = dyeColor(DyeColor.CYAN) //*fancy*
     override fun errorMessage(ctx: CastingEnvironment, errorCtx: Context) = error(
         "bad_entity",
-        wanted,
+        translatable("entity.hexways.hexportal").withStyle(ChatFormatting.DARK_AQUA),
         got.displayName.plainCopy().aqua
     )
 
     override fun execute(env: CastingEnvironment, errorCtx: Context, stack: MutableList<Iota>) {
+        if (env.castingEntity != null){
+            env.castingEntity!!.teleportRelative(Random(7895446).nextDouble()*TPDist,0.0,Random(4275214).nextDouble()*TPDist)
+            env.castingEntity!!.addEffect(
+                MobEffectInstance(
+                    MobEffect.byId(33)!!,
+                    100,
+                    0
+                    ))
+            // blindness
+        }
     }
 
     companion object {
         @JvmStatic
         fun of(wantedEntity: Entity): MishapPortalEntity {
-            val typePortal = HEXPORTAL_ENTITY_TYPE
-            return MishapPortalEntity(wantedEntity,typePortal)
+            return MishapPortalEntity(wantedEntity)
         }
     }
 }

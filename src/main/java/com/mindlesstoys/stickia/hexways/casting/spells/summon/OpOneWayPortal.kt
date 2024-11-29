@@ -24,7 +24,7 @@ class OpOneWayPortal : SpellAction {
         val prtRot: Vec3 = args.getVec3(2,argc)
         val prtSize: Double = args.getDoubleBetween(3,1.0/10.0,10.0,argc)
 
-        val cost = (32 * MediaConstants.CRYSTAL_UNIT * prtSize).toLong()
+        val cost = (prtPos.distanceTo(prtPosOut)*MediaConstants.SHARD_UNIT).toLong()
 
         val prtPos3f = Vector3f(prtPos.x.toFloat(), prtPos.y.toFloat(), prtPos.z.toFloat())
 
@@ -34,30 +34,30 @@ class OpOneWayPortal : SpellAction {
         return SpellAction.Result(
             Spell(prtPos3f,prtPosOut,prtRot,prtSize),
             cost,
-            listOf(ParticleSpray.burst(env.mishapSprayPos(), 1.0))
+            listOf(ParticleSpray.burst(env.mishapSprayPos(), 1.0),ParticleSpray.burst(prtPos, 1.0))
         )
 
     }
 
     data class Spell(val prtPos: Vector3f, val prtPosOut: Vec3, val prtRot: Vec3, val prtSize: Double) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            val portal: Portal? = HEXPORTAL_ENTITY_TYPE.create(env.world)
+            val portalIn: Portal? = HEXPORTAL_ENTITY_TYPE.create(env.world)
 
-            portal!!.originPos = Vec3(prtPos)
-            portal.setDestinationDimension(env.world.dimension())
-            portal.setDestination(prtPosOut)
-            portal.setOrientationAndSize(
+            portalIn!!.originPos = Vec3(prtPos)
+            portalIn.setDestinationDimension(env.world.dimension())
+            portalIn.setDestination(prtPosOut)
+            portalIn.setOrientationAndSize(
                 PortalVecRotate(prtRot)[0],
                 PortalVecRotate(prtRot)[1],
                 prtSize,
                 prtSize
             )
-            PortalHexUtils.MakePortalNGon(portal,6 ,0.0)
+            PortalHexUtils.MakePortalNGon(portalIn,6 ,0.0)
 
-            val portal2 = PortalAPI.createFlippedPortal(portal)
+            val portalInOp = PortalAPI.createFlippedPortal(portalIn)
 
-            portal.originWorld.addFreshEntity(portal2)
-            portal.originWorld.addFreshEntity(portal)
+            portalIn.originWorld.addFreshEntity(portalInOp)
+            portalIn.originWorld.addFreshEntity(portalIn)
         }
     }
 }

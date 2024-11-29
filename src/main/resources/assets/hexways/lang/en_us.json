@@ -1,4 +1,7 @@
 {
+  "entity.hexways.hexportal": "Hex Portal",
   "hexcasting.action.hexways:optwoway": "Summon 2 Way Portal",
-  "hexcasting.action.hexways:oponeway": "Summon 1 Way Portal"
+  "hexcasting.action.hexways:oponeway": "Summon 1 Way Portal",
+  "hexcasting.action.hexways:opmoveinportal": "Translocate Input Portal",
+  "hexcasting.action.hexways:opmoveoutportal": "Translocate Output Portal"
 }
