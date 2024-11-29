@@ -28,7 +28,8 @@ class PortalAmbit(private val env: CastingEnvironment) : IsVecInRange {
                 val portals = env.world.getEntities(HEXPORTAL_ENTITY_TYPE,aabb) {true}
                 for (e: HexPortal in portals) {
                     val ambitLeft = (ambit - e.eyePosition.distanceTo(eyePos))/2
-                    if (e.destPos.distanceTo(pos) <= ambitLeft) { //massive bug in 1.19 HexWays being patched here...
+                    if (e.destPos.distanceTo(pos) <= ambitLeft
+                        && e.ambitTraversable) { //massive bug in 1.19 HexWays being patched here...
                         println(e.destPos.distanceTo(pos))
                         inAmbitMaybe = true
                         break

@@ -1,4 +1,4 @@
-package com.mindlesstoys.stickia.hexways.casting.spells
+package com.mindlesstoys.stickia.hexways.casting.spells.summon
 
 import at.petrak.hexcasting.api.casting.*
 import at.petrak.hexcasting.api.casting.castables.SpellAction
@@ -8,14 +8,12 @@ import at.petrak.hexcasting.api.misc.MediaConstants
 import com.mindlesstoys.stickia.hexways.PortalHexUtils
 import com.mindlesstoys.stickia.hexways.PortalHexUtils.Companion.PortalVecRotate
 import com.mindlesstoys.stickia.hexways.entites.EntityRegistry.HEXPORTAL_ENTITY_TYPE
-import com.mindlesstoys.stickia.hexways.entites.HexPortal
-import net.minecraft.world.level.portal.PortalInfo
 import net.minecraft.world.phys.Vec3
 import org.joml.Vector3f
 import qouteall.imm_ptl.core.api.PortalAPI
 import qouteall.imm_ptl.core.portal.Portal
 
-class OpTwoWayPortal : SpellAction {
+class OpOneWayPortal : SpellAction {
     override val argc = 4
     override fun execute(
         args: List<Iota>,
@@ -43,27 +41,23 @@ class OpTwoWayPortal : SpellAction {
 
     data class Spell(val prtPos: Vector3f, val prtPosOut: Vec3, val prtRot: Vec3, val prtSize: Double) : RenderedSpell {
         override fun cast(env: CastingEnvironment) {
-            val portalIn: Portal? = HEXPORTAL_ENTITY_TYPE.create(env.world)
+            val portal: Portal? = HEXPORTAL_ENTITY_TYPE.create(env.world)
 
-            portalIn!!.originPos = Vec3(prtPos)
-            portalIn.setDestinationDimension(env.world.dimension())
-            portalIn.setDestination(prtPosOut)
-            portalIn.setOrientationAndSize(
+            portal!!.originPos = Vec3(prtPos)
+            portal.setDestinationDimension(env.world.dimension())
+            portal.setDestination(prtPosOut)
+            portal.setOrientationAndSize(
                 PortalVecRotate(prtRot)[0],
                 PortalVecRotate(prtRot)[1],
                 prtSize,
                 prtSize
             )
-            PortalHexUtils.MakePortalNGon(portalIn,6 ,0.0)
+            PortalHexUtils.MakePortalNGon(portal,6 ,0.0)
 
-            val portalInOp = PortalAPI.createFlippedPortal(portalIn)
-            val PortalOut = PortalAPI.createReversePortal(portalIn)
-            val PortalOutOp = PortalAPI.createFlippedPortal(PortalOut)
+            val portal2 = PortalAPI.createFlippedPortal(portal)
 
-            portalIn.originWorld.addFreshEntity(portalIn)
-            portalIn.originWorld.addFreshEntity(portalInOp)
-            portalIn.originWorld.addFreshEntity(PortalOut)
-            portalIn.originWorld.addFreshEntity(PortalOutOp)
+            portal.originWorld.addFreshEntity(portal2)
+            portal.originWorld.addFreshEntity(portal)
         }
     }
 }
