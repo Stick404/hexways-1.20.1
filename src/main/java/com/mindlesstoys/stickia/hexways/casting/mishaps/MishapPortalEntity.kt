@@ -7,7 +7,6 @@ import at.petrak.hexcasting.api.pigment.FrozenPigment
 import at.petrak.hexcasting.api.utils.aqua
 import net.minecraft.ChatFormatting
 import net.minecraft.network.chat.Component.translatable
-import net.minecraft.network.chat.Style
 import net.minecraft.world.effect.MobEffect
 import net.minecraft.world.effect.MobEffectInstance
 import net.minecraft.world.entity.Entity

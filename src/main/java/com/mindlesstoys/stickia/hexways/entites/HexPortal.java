@@ -12,7 +12,6 @@ public class HexPortal extends Portal {
     }
     public boolean ambitTraversable = true;
     public boolean isMirror = true;
-    public Component name = super.getDisplayName();
 
     @Override
     protected void addAdditionalSaveData(CompoundTag compoundTag) {
@@ -30,10 +29,5 @@ public class HexPortal extends Portal {
         if (compoundTag.contains("isMirror")){
             this.isMirror = compoundTag.getBoolean("isMirror");
         }
-    }
-
-    @Override
-    public Component getDisplayName() {
-        return super.getDisplayName();
     }
 }
